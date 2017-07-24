@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class CommentBox extends Component {
+class CommentBox extends Component {
   render(){
     return (
       <div className="comment-box">
@@ -10,3 +10,5 @@ export default class CommentBox extends Component {
     );
   }
 }
+
+export default CommentBox;
