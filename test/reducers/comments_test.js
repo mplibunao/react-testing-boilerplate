@@ -4,12 +4,11 @@ import { SAVE_COMMENT } from '../../src/actions/types';
 
 describe('Comments Reducer', ()=>{
   it('handles action with unknown type', ()=>{
-    expect(commentReducer()).to.eql([]);
+    expect(commentReducer(undefined, {})).to.eql([]);
   });
 
   it('SAVE_COMMENT', ()=>{
-    const state = ["New Comment"];
-    const action = SAVE_COMMENT;
-    expect(commentReducer(state, action)).to.eql(["New Comment"]);
+    const action = { type: SAVE_COMMENT, payload: 'New Comment' };
+    expect(commentReducer([], action)).to.eql(["New Comment"]);
   });
 });
