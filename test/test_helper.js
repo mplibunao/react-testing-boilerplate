@@ -3,7 +3,11 @@ import jsdom from 'jsdom';
 import _$ from 'jquery';
 import TestUtils from 'react-addons-test-utils';
 import ReactDOM from 'react-dom';
-
+import { expect } from 'chai';
+import React from 'react';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import reducers from '../src/reducers/';
 
 // Setting up testing environment to run like a browser in the CLI
 // Assign a fake html DOM (using jsdom) to the global.document (window)
@@ -15,7 +19,15 @@ const $ = _$(global.window);
 
 // Build 'renderComponent' helper that renders a given react component
 function renderComponent(Component){
-  const componentInstance = TestUtils.renderIntoDocument(<Component />);
+  const componentInstance = TestUtils.renderIntoDocument(
+  <Provider store={createStore(reducers)}>
+    <Component />
+  </Provider>
+  
+);
   return $(ReactDOM.findDOMNode(componentInstance)); // produces HTML which is wrapped inside a jquery object
 
 }
+
+
+export { renderComponent, expect };
