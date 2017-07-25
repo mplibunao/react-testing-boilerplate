@@ -9,21 +9,30 @@ class CommentBox extends Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event){
     this.setState({comment: event.target.value});
   }
 
+  handleSubmit(event){
+    event.preventDefault();
+    this.setState({comment: ''});
+  }
+
   render(){
     return (
-      <div className="comment-box">
+      <form
+        onSubmit={this.handleSubmit}
+        className="comment-box"
+      >
         <textarea
           onChange={this.handleChange}
           value={this.state.comment}  
         />
-        <button>Submit Comment</button>
-      </div>
+        <button action="submit">Submit Comment</button>
+      </form>
     );
   }
 }
