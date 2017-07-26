@@ -18,16 +18,22 @@ const $ = _$(global.window);
 
 
 // Build 'renderComponent' helper that renders a given react component
-function renderComponent(Component, props, state){
+function renderComponent(Component, props = {}, state = {}){
   const componentInstance = TestUtils.renderIntoDocument(
-  <Provider store={createStore(reducers, state)}>
-    <Component {...props} />
-  </Provider>
-  
-);
+    <Provider store={createStore(reducers, state)}>
+      <Component {...props} />
+    </Provider>
+  );
   return $(ReactDOM.findDOMNode(componentInstance)); // produces HTML which is wrapped inside a jquery object
-
 }
 
+// Build helper for simulating events
+// Every jquery object will have access to a simulate function
+$.fn.simulate = function(eventName, value){
+  if (value){
+    this.val(value);
+  }
+  TestUtils.Simulate[eventName](this[0]);
+};
 
 export { renderComponent, expect };
