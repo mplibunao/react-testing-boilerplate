@@ -18,10 +18,10 @@ const $ = _$(global.window);
 
 
 // Build 'renderComponent' helper that renders a given react component
-function renderComponent(Component){
+function renderComponent(Component, props, state){
   const componentInstance = TestUtils.renderIntoDocument(
-  <Provider store={createStore(reducers)}>
-    <Component />
+  <Provider store={createStore(reducers, state)}>
+    <Component {...props} />
   </Provider>
   
 );
